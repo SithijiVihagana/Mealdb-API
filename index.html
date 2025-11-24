@@ -12,9 +12,9 @@
 
 <body>
     <!-- navbar -->
-    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"> <a href="/"
-            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> 
-            <img src="assets/img/logo.png" id="logo" alt="logo">  
+    <header class="d-flex flex-wrap justify-content-center py-3"> <a href="/"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img src="assets/img/logo.png" id="logo" alt="logo">
             <span class="fs-4 fw-semibold">RECIPES</span> </a>
         <ul class="nav nav-pills m-2">
             <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
@@ -24,7 +24,41 @@
             <li class="nav-item"><a href="#" class="nav-link">Random Meal</a></li>
         </ul>
     </header>
-    
+    <!-- carousel -->
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/img/img-1.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/img-2.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="assets/img/img-3.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <!-- footer -->
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Categories</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Areas</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Ingredients</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Random Meal</a></li>
+        </ul>
+        <p class="text-center text-body-secondary">© 2025 Company, Inc | All rights reserved</p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
