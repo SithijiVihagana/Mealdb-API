@@ -15,13 +15,13 @@
     <header class="d-flex flex-wrap justify-content-center py-3"> <a href="/"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
             <img src="assets/img/logo.png" id="logo" alt="logo">
-            <span class="fs-4 fw-semibold">RECIPES</span> </a>
+            <span class="fs-4 fw-semibold title">RECIPES</span> </a>
         <ul class="nav nav-pills m-2">
             <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Categories</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Areas</a></li>
             <li class="nav-item"><a href="#" class="nav-link">Ingredients</a></li>
-            <li class="nav-item"><a href="#" class="nav-link">Random Meal</a></li>
+            <li class="nav-item"><a href="random.html" class="nav-link">Random Meal</a></li>
         </ul>
     </header>
     <!-- carousel -->
@@ -48,6 +48,27 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+
+    <!-- meal_search -->
+    <section class="meal_search">
+        <div class="container">
+            <h2 id="search">Meal Search</h2>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" id="txt_mealsearch" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-primary" id="btn_search"  type="submit">Search</button>
+            </form>
+        </div>
+        <div class="d-flex align-items-center justify-content-center m-3">
+            <p id="meal_result_header"></p>
+        </div>
+        <div class="meal_container d-flex align-items-center justify-content-center m-3">
+           <div id="searchResults" class="row mt-4"></div>
+        </div>
+    </section>
+
+
     <!-- footer -->
     <footer class="py-3 my-4">
         <ul class="nav justify-content-center border-bottom pb-3 mb-3">
