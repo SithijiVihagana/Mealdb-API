@@ -104,6 +104,55 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Fetch Error:", error);
         }
     }
+
+    let Ingredient_heading = document.getElementById("Ingredient_header");
+    let Ingredient_input = document.getElementById("txt_Ingredientsearch");
+    let btn_Ingredient = document.getElementById("btn_Ingredient");
+
+        if (Ingredient_input) {
+            Ingredient_input.addEventListener("keypress", e => {
+                if (e.key === "Enter") {
+                    IngredientSearch(Ingredient_input.value.trim());
+                }
+            });
+        }
+
+        if (btn_Ingredient) {
+            btn_Ingredient.addEventListener("click", e => {
+                IngredientSearch(Ingredient_input.value.trim());
+            });
+        }
+
+
+    async function IngredientSearch(ingredient_name) {
+        try {
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient_name}`);
+            let data = await res.json();
+
+            if (data.meals === null) {
+                Ingredient_heading.innerText = "No results found!!";
+            } else {
+                Ingredient_heading.innerText = "Search Result for " + ingredient_name;
+
+                let container = document.getElementById("Results_Ingredient");
+                container.innerHTML = "";
+
+                data.meals.forEach(meal => {
+                    container.innerHTML += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
+                            <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+                            <div class="card-body">
+                                <h5 class="card-title">${meal.strMeal}</h5>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
     
 
     let category_heading = document.getElementById("category_header");
