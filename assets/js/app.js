@@ -14,7 +14,7 @@ async function apiCall(meal_name) {
     try {
         let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal_name}`);
         let data = await res.json();
-        console.log(data);
+        
         if (data.meals === null) {
             heading.innerText = "No results found!!";
         } else {
@@ -59,32 +59,45 @@ function openMeal(id) {
 }
 
 async function random() {
-
     try {
-        let res = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+        let res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
         let data = await res.json();
-        console.log(data);
-        let container = document.getElementById("Results");
-        container.innerHTML = "";
-        const mealsArray = data.meals;
-        mealsArray.forEach(meal => {
+        let meal = data.meals[0];
 
-        let result = `
-        <div class="col-md-3 mb-4">
-            <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
-                <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
-                <div class="card-body">
-                    <h5 class="card-title">${meal.strMeal}</h5>
+        let ingredients = "";
+        for (let i = 1; i <= 20; i++) {
+            let ingredient = meal[`strIngredient${i}`];
+            let measure = meal[`strMeasure${i}`];
+
+            if (ingredient && ingredient.trim() !== "") {
+                ingredients += `<li>${ingredient} - ${measure}</li>`;
+            }
+        }
+
+        let container = document.getElementById("Results");
+        container.innerHTML = ""; 
+        let card = `
+            <div class="col-md-6 mb-4 mx-auto">
+
+                <div class="card h-100 shadow-sm" onclick="openMeal(${meal.idMeal})">
+                    <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+                    <div class="card-body">
+                        <h5 class="card-title">${meal.strMeal}</h5>
+                        <p class="card-text">Category :  ${meal.strCategory}</p>
+                        <p class="card-text">Area :  ${meal.strArea}</p>
+                        <p class="card-text">Ingredients & Measurements :</p>
+                        <ul>
+                           ${ingredients}
+                       </ul>
+                        <p class="card-text">Instructions :  ${meal.strInstructions}</p>
+                    </div>
                 </div>
             </div>
-        </div>
         `;
 
-            container.innerHTML += result;
-        });
+        container.innerHTML = card; 
 
     } catch (error) {
         console.error("Fetch Error:", error);
     }
-
 }
