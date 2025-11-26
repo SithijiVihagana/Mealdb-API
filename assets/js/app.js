@@ -56,7 +56,54 @@ document.addEventListener("DOMContentLoaded", function () {
         container.innerHTML += result;
     });
 }
+    let Area_heading = document.getElementById("Area_header");
+    let Area_input = document.getElementById("txt_Areasearch");
+    let btn_Area = document.getElementById("btn_Area");
 
+        if (Area_input) {
+            Area_input.addEventListener("keypress", e => {
+                if (e.key === "Enter") {
+                    AreaSearch(Area_input.value.trim());
+                }
+            });
+        }
+
+        if (btn_Area) {
+            btn_Area.addEventListener("click", e => {
+                AreaSearch(Area_input.value.trim());
+            });
+        }
+
+
+    async function AreaSearch(area_name) {
+        try {
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area_name}`);
+            let data = await res.json();
+
+            if (data.meals === null) {
+                Area_heading.innerText = "No results found!!";
+            } else {
+                Area_heading.innerText = "Search Result for " + area_name;
+
+                let container = document.getElementById("Results_Area");
+                container.innerHTML = "";
+
+                data.meals.forEach(meal => {
+                    container.innerHTML += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
+                            <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+                            <div class="card-body">
+                                <h5 class="card-title">${meal.strMeal}</h5>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
     
 
     let category_heading = document.getElementById("category_header");
