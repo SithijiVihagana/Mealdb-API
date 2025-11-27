@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let heading = document.getElementById("meal_result_header");
     let btn_search = document.getElementById("btn_search");
 
-
-
     if (input) {
         input.addEventListener("keypress", e => {
             if (e.key === "Enter") {
@@ -58,6 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
             container.innerHTML += result;
         });
     }
+
+
     let left = document.getElementById("left_col");
     let right = document.getElementById("right_col");
     if (left && right) {
@@ -185,51 +185,44 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Fetch Error:", error);
         }
     }
-    let left_list = document.getElementById("left_colum");
-    let right_list = document.getElementById("right_colum");
-    if (left_list && right_list) {
-        categoryload();
+
+    let categoryDropdown = document.getElementById("category_dropdown");
+    if (categoryDropdown) {
+        loadCategories();
+
+        categoryDropdown.addEventListener("change", () => {
+            let selected = categoryDropdown.value;
+            if (selected !== "") {
+                categorySearch(selected);
+            }
+        });  
     }
 
-    async function categoryload() {
+    async function loadCategories() {
         try {
-            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?c=list`);
+            let res = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?c=list");
             let data = await res.json();
-            if (data.meals !== null) {
-                left_list.innerHTML = "";
-                right_list.innerHTML = "";
-                let middle = Math.ceil(data.meals.length / 2);
-                let leftSide = data.meals.slice(0, middle);
-                let rightSide = data.meals.slice(middle);
 
-                leftSide.forEach(category => {
-                    left_list.innerHTML += `<li>${category.strCategory}</li>`;
-                });
+            categoryDropdown.innerHTML = `<option value="">Select Category</option>`;
 
-                rightSide.forEach(category => {
-                    right_list.innerHTML += `<li>${category.strCategory}</li>`;
-                });
-            }
+            data.meals.forEach(item => {
+                categoryDropdown.innerHTML += `
+                <option value="${item.strCategory}">${item.strCategory}</option>
+            `;
+            });
+
         } catch (error) {
-            console.error("Fetch Error:", error);
+            console.log("Category Load Error:", error);
         }
     }
 
     let category_heading = document.getElementById("category_header");
-    let category_input = document.getElementById("txt_categorysearch");
+    let category_input = document.getElementById("category_dropdown");
     let btn_category = document.getElementById("btn_category");
-
-    if (category_input) {
-        category_input.addEventListener("keypress", e => {
-            if (e.key === "Enter") {
-                categorySearch(category_input.value.trim());
-            }
-        });
-    }
 
     if (btn_category) {
         btn_category.addEventListener("click", e => {
-            categorySearch(category_input.value.trim());
+            categorySearch(categoryDropdown.value);
         });
     }
 
