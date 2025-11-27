@@ -58,6 +58,36 @@ document.addEventListener("DOMContentLoaded", function () {
             container.innerHTML += result;
         });
     }
+    let left = document.getElementById("left_col");
+    let right = document.getElementById("right_col");
+    if (left && right) {
+        Areaload();
+    }
+
+    async function Areaload() {
+        try {
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
+            let data = await res.json();
+            if (data.meals !== null) {
+                left.innerHTML = "";
+                right.innerHTML = "";
+                let center = Math.ceil(data.meals.length / 2);
+                let leftcontent = data.meals.slice(0, center);
+                let rightcontent = data.meals.slice(center);
+
+                leftcontent.forEach(area => {
+                    left.innerHTML += `<li>${area.strArea}</li>`;
+                });
+
+                rightcontent.forEach(area => {
+                    right.innerHTML += `<li>${area.strArea}</li>`;
+                });
+            }
+        } catch (error) {
+            console.error("Fetch Error:", error);
+        }
+    }
+
     let Area_heading = document.getElementById("Area_header");
     let Area_input = document.getElementById("txt_Areasearch");
     let btn_Area = document.getElementById("btn_Area");
