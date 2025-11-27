@@ -58,9 +58,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-   // Area_based search
+    // Area_based search
     let AreaDropdown = document.getElementById("area_dropdown");
-    
+
     if (AreaDropdown) {
         Areaload();
         AreaDropdown.addEventListener("change", () => {
@@ -68,13 +68,13 @@ document.addEventListener("DOMContentLoaded", function () {
             if (selected !== "") {
                 AreaSearch(selected);
             }
-        });  
+        });
     }
-    
-    async function Areaload(){
-        try{
-            let res=await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
-            let data= await res.json();
+
+    async function Areaload() {
+        try {
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
+            let data = await res.json();
             AreaDropdown.innerHTML = `<option value="">Select Area</option>`;
 
             data.meals.forEach(item => {
@@ -86,12 +86,12 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.log("Area Load Error:", error);
         }
-        
+
     }
-    
+
 
     let Area_heading = document.getElementById("Area_header");
-    
+
     let btn_Area = document.getElementById("btn_Area");
 
     if (btn_Area) {
@@ -130,22 +130,42 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Fetch Error:", error);
         }
     }
-
+    //Ingredient Search
     let Ingredient_heading = document.getElementById("Ingredient_header");
-    let Ingredient_input = document.getElementById("txt_Ingredientsearch");
     let btn_Ingredient = document.getElementById("btn_Ingredient");
+    let IngredientDropdown = document.getElementById("ingredient_dropdown");
 
-    if (Ingredient_input) {
-        Ingredient_input.addEventListener("keypress", e => {
-            if (e.key === "Enter") {
-                IngredientSearch(Ingredient_input.value.trim());
+    if (IngredientDropdown) {
+        Ingredientload();
+        IngredientDropdown.addEventListener("change", () => {
+            let selected = IngredientDropdown.value;
+            if (selected !== "") {
+                IngredientSearch(selected);
             }
         });
     }
 
+    async function Ingredientload() {
+        try {
+            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
+            let data = await res.json();
+            IngredientDropdown.innerHTML = `<option value="">Select Ingredient</option>`;
+
+            data.meals.forEach(item => {
+                IngredientDropdown.innerHTML += `
+                <option value="${item.strIngredient}">${item.strIngredient}</option>
+            `;
+            });
+
+        } catch (error) {
+            console.log("Ingredient Load Error:", error);
+        }
+
+    }
+
     if (btn_Ingredient) {
         btn_Ingredient.addEventListener("click", e => {
-            IngredientSearch(Ingredient_input.value.trim());
+            IngredientSearch(IngredientDropdown.value);
         });
     }
 
@@ -180,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-//category_based search
+    //category_based search
     let categoryDropdown = document.getElementById("category_dropdown");
     if (categoryDropdown) {
         loadCategories();
@@ -190,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (selected !== "") {
                 categorySearch(selected);
             }
-        });  
+        });
     }
 
     async function loadCategories() {
