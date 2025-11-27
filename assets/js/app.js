@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // meal search function
     let input = document.getElementById("txt_mealsearch");
     let heading = document.getElementById("meal_result_header");
     let btn_search = document.getElementById("btn_search");
@@ -57,52 +58,45 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-    let left = document.getElementById("left_col");
-    let right = document.getElementById("right_col");
-    if (left && right) {
+   // Area_based search
+    let AreaDropdown = document.getElementById("area_dropdown");
+    
+    if (AreaDropdown) {
         Areaload();
-    }
-
-    async function Areaload() {
-        try {
-            let res = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
-            let data = await res.json();
-            if (data.meals !== null) {
-                left.innerHTML = "";
-                right.innerHTML = "";
-                let center = Math.ceil(data.meals.length / 2);
-                let leftcontent = data.meals.slice(0, center);
-                let rightcontent = data.meals.slice(center);
-
-                leftcontent.forEach(area => {
-                    left.innerHTML += `<li>${area.strArea}</li>`;
-                });
-
-                rightcontent.forEach(area => {
-                    right.innerHTML += `<li>${area.strArea}</li>`;
-                });
+        AreaDropdown.addEventListener("change", () => {
+            let selected = AreaDropdown.value;
+            if (selected !== "") {
+                AreaSearch(selected);
             }
-        } catch (error) {
-            console.error("Fetch Error:", error);
-        }
+        });  
     }
+    
+    async function Areaload(){
+        try{
+            let res=await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
+            let data= await res.json();
+            AreaDropdown.innerHTML = `<option value="">Select Area</option>`;
+
+            data.meals.forEach(item => {
+                AreaDropdown.innerHTML += `
+                <option value="${item.strArea}">${item.strArea}</option>
+            `;
+            });
+
+        } catch (error) {
+            console.log("Area Load Error:", error);
+        }
+        
+    }
+    
 
     let Area_heading = document.getElementById("Area_header");
-    let Area_input = document.getElementById("txt_Areasearch");
+    
     let btn_Area = document.getElementById("btn_Area");
-
-    if (Area_input) {
-        Area_input.addEventListener("keypress", e => {
-            if (e.key === "Enter") {
-                AreaSearch(Area_input.value.trim());
-            }
-        });
-    }
 
     if (btn_Area) {
         btn_Area.addEventListener("click", e => {
-            AreaSearch(Area_input.value.trim());
+            AreaSearch(AreaDropdown.value);
         });
     }
 
@@ -186,6 +180,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+//category_based search
     let categoryDropdown = document.getElementById("category_dropdown");
     if (categoryDropdown) {
         loadCategories();
@@ -264,6 +259,7 @@ function openMeal(id) {
     window.location.href = `meal.html?id=${id}`;
 }
 
+// random meal
 async function random() {
     try {
         let res = await fetch("https://www.themealdb.com/api/json/v1/1/random.php");
