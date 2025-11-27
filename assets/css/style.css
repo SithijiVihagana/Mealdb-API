@@ -38,3 +38,24 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
+#mealImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:30%;
+    height: auto;
+
+}
+
+#mealName{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+
+

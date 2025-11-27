@@ -232,7 +232,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     let category_heading = document.getElementById("category_header");
-    let category_input = document.getElementById("category_dropdown");
     let btn_category = document.getElementById("btn_category");
 
     if (btn_category) {
