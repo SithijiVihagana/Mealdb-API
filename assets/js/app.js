@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
                 <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
                 <div class="card-body">
-                    <h5 class="card-title">${meal.strMeal}</h5>
+                    <h5 class="card-title d-flex justify-content-center">${meal.strMeal}</h5>
                 </div>
             </div>
         </div>
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
                             <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
                             <div class="card-body">
-                                <h5 class="card-title">${meal.strMeal}</h5>
+                                <h5 class="card-title d-flex justify-content-center">${meal.strMeal}</h5>
                             </div>
                         </div>
                     </div>`;
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
                             <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
                             <div class="card-body">
-                                <h5 class="card-title">${meal.strMeal}</h5>
+                                <h5 class="card-title d-flex justify-content-center">${meal.strMeal}</h5>
                             </div>
                         </div>
                     </div>`;
@@ -260,7 +260,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="card h-100 shadow-sm meal-card" onclick="openMeal(${meal.idMeal})">
                             <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
                             <div class="card-body">
-                                <h5 class="card-title">${meal.strMeal}</h5>
+                                <h5 class="card-title d-flex justify-content-center">${meal.strMeal}</h5>
                             </div>
                         </div>
                     </div>`;
@@ -301,9 +301,12 @@ async function random() {
             <div class="col-md-6 mb-4 mx-auto">
 
                 <div class="card h-100 shadow-sm" onclick="openMeal(${meal.idMeal})">
-                    <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+                    <div class="text-center m-4">
+                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}"class="img-fluid rounded meal_image">
+                </div>
+
                     <div class="card-body">
-                        <h5 class="card-title">${meal.strMeal}</h5>
+                        <h5 class="card-title d-flex justify-content-center">${meal.strMeal}</h5>
                         <p class="card-text">Category :  ${meal.strCategory}</p>
                         <p class="card-text">Area :  ${meal.strArea}</p>
                         <p class="card-text">Ingredients & Measurements :</p>

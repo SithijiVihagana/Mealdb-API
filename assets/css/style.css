@@ -58,4 +58,15 @@
     
 }
 
+.meal-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.meal_image {
+    max-width: 70%;
+    max-height: 250px;
+    object-fit: cover;
+}
 
