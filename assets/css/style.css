@@ -65,8 +65,8 @@
 }
 
 .meal_image {
-    max-width: 70%;
-    max-height: 250px;
+    max-width: 60%;
+    max-height: 350px;
     object-fit: cover;
 }
 
